@@ -7,7 +7,7 @@
 
     <body>
         <h1>
-            <center><font color="green" face="arial" size="24">Ping Pong Scoreboard</font></center>
+            <center><font color="green" face="arial" size="6">Ping Pong Scoreboard</font></center>
         </h1>
 
         <form method="post" action="/add_score/" enctype="multipart/form-data"> {% csrf_token %}
@@ -71,7 +71,7 @@
         </TR>
         {% endfor %}
         <TR rowspan=2>
-            <TD bgcolor=#FFFFFF colspan=8 align=center>Match : <b>{{ last_game.id }}</b> :  <b>{{ last_game.winner.name }}</b> Vs {{ last_game.loser.name }} for <b>{{ last_game.points }}</b> points.</td>
+            <TD bgcolor=#FFFFFF colspan=8 align=center>Match : <b>{{ last_game.id }}</b> :  <b>{{ last_game.winner.name }}</b> vs {{ last_game.loser.name }} for <b>{{ last_game.points }}</b> points.</td>
         </tr>
         </TABLE>
     </body>
