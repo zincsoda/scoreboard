@@ -16,6 +16,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 # https://docs.djangoproject.com/en/1.6/ref/settings/#databases
 # use sqlite for local development (when DATABASE_URL isn't
 # defined, as that is what dj_database_url is looking for).
+
 sqlite_db = 'sqlite://localhost/' + os.path.join(BASE_DIR, 'db.sqlite3')
 DATABASES = {'default': dj_database_url.config(default=sqlite_db)}
 
