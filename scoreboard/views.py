@@ -8,7 +8,11 @@ import math;
 
 def home(request):
     last_game = Game.objects.all().last()
-    resp_dict = {"players": Player.objects.order_by('rating').reverse(), "last_game":last_game}
+    players = Player.objects.order_by('rating').reverse()
+    players_last_win_loss = []
+    #for player in players:
+
+    resp_dict = {"players": players, "last_game":last_game}
     return render_to_response('home.html', resp_dict, context_instance=RequestContext(request))
 
 

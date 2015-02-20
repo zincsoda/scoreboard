@@ -1,4 +1,4 @@
-from scoreboard.models import Player
+from scoreboard.models import Player, Game
 
 import math;
 
@@ -8,7 +8,7 @@ class Scoring(object):
         return 30
 
     def get_expectation(self,rating_1, rating_2):
-        calc = (1.0 / (1.0 + pow(10, ((rating_2 - rating_1) / 400))));
+        calc = (1.0 / (1.0 + pow(10, (float(rating_2 - rating_1) / 400))));
         return calc;
 
     def get_delta(self, rating, expected, actual):
@@ -21,8 +21,11 @@ class Scoring(object):
     
     def update_player_ratings(self, winner, loser):
         winner_expected = self.get_expectation(winner.rating, loser.rating)
+        print 'winner_expected: ', winner_expected
         loser_expected = 1 - winner_expected
+        print 'loser_expected: ',loser_expected
         points = self.get_delta(winner.rating, winner_expected, 1.0)
+        print 'points: ', points
         winner.rating = self.modify_rating(winner.rating, winner_expected, 1.0)
         loser.rating = self.modify_rating(loser.rating, loser_expected, 0)
         winner.save()
@@ -48,3 +51,9 @@ class Scoring(object):
             player.streak = 0
             player.save()
 
+    def recalculate_scores(self):
+        self.reset_ratings()
+        for game in Game.objects.all():
+            self.update_player_streak(game.winner, game.loser)
+            self.update_player_ratings(game.winner, game.loser) 
+            game.save()
