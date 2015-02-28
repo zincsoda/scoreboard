@@ -29,6 +29,7 @@
     </div>
 </form>
 
+<div class="table_div">
 <table>
 <tr>
 <th><b>RANK</th>
@@ -44,13 +45,13 @@
     <td>{{forloop.counter}}</td>
     <td>{{ player.name }}</td>
     <!--TD BGCOLOR=#CCDDEE align=center>60</td-->
-    <td>Conor K</td>
-    <td>Conor K</td>
+    <td>{{ player.last_win }}</td>
+    <td>{{ player.last_loss }}</td>
 
     {% if player.streak < 0 %}
-    <td> {{ player.streak }}</td>
+    <td> <font color=#ff3333>{{ player.streak }}</td>
     {% else %}
-    <td>{{ player.streak}}</td>
+    <td> <font color=#00ff00>{{ player.streak}}</td>
     {% endif %}
 
     <td>{{ player.rating }}</td>
@@ -60,6 +61,7 @@
     <td colspan=8>Match : <b>{{ last_game.id }}</b> :  <b>{{ last_game.winner.name }}</b> vs {{ last_game.loser.name }} for <b>{{ last_game.points }}</b> points.</td>
 </tr>
 </table>
+</div>
 
 </div>
 </div>

@@ -11,6 +11,8 @@ class Player(models.Model):
     name = models.CharField(max_length=128)
     rating = models.IntegerField(default=2000)
     streak = models.IntegerField(default=0)
+    last_win = models.CharField(max_length=128, default="")
+    last_loss = models.CharField(max_length=128, default="")
 
     def __unicode__(self):
         return u'%s' % self.name

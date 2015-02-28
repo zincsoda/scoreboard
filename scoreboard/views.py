@@ -29,6 +29,11 @@ def add_score(request):
         delta = Scoring().update_player_ratings(winner, loser)
         Scoring().update_player_streak(winner, loser)
 
+        winner.last_win = loser.name
+        loser.last_loss = winner.name
+        winner.save()
+        loser.save()
+
         new_game = Game.objects.create(winner=winner, loser=loser, points=delta)
         new_game.save()
     else:
