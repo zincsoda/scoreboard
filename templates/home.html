@@ -1,75 +1,66 @@
 {% extends 'base.html' %}
 {% block body %}
-<div style="background-color: #E8E7EB;">
+<div id="container">
 
-<h1>
-    <center><font color="green" face="arial" size="6">Ping Pong Scoreboard</font></center>
-</h1>
+<div class="box">
+<h1>Ping Pong Scoreboard </h1>
 
-<form method="post" action="/add_score/" enctype="multipart/form-data"> {% csrf_token %}
-    <TABLE border=0 align=center cellspacing=5 cellpadding=1>
-        <TR>
-            <TD COLSPAN=1><b>Enter Game Result:</b></TD>
-        </TR>
-        <TR>
-            <TD align=center width=150  BGCOLOR="#AACCAA">Winner<br>
-                <select name="winner">
-                {% for player in players %}
-                <option {% if player == last_game.winner %} selected="selected" {% endif %} value="{{ player.name }}">{{ player.name }}</option>
-                {% endfor %}
-                </select>
-                <p/>
-            </TD>
-        </TR>
-        <TR>
-            <TD align=center width=150 BGCOLOR="#FFAAAA">Loser<br>
-                <select name="loser" >
-                {% for player in players %}
-                <option {% if player == last_game.loser %} selected="selected" {% endif %} value="{{ player.name }}">{{ player.name }}</option>
-                {% endfor %}
-                </select>
-                <p/>
-           </TD>
-        </TR>
-        <TR>
-            <TD>
-                <input type="submit" name=".submit" />
-            </TD>
-        </TR>
-    </TABLE>
+<form class="winlose" method="post" action="/add_score/" enctype="multipart/form-data"> {% csrf_token %}
+    <div class="label_input">
+    <label>Winner:</label>
+    <select name="winner">
+    {% for player in players %}
+    <option {% if player == last_game.winner %} selected="selected" {% endif %} value="{{ player.name }}">{{ player.name }}</option>
+    {% endfor %}
+    </select>
+    </div>
+
+    <div class="label_input">
+    <label>Loser:</label>
+    <select name="loser" >
+    {% for player in players %}
+    <option {% if player == last_game.loser %} selected="selected" {% endif %} value="{{ player.name }}">{{ player.name }}</option>
+    {% endfor %}
+    </select>
+    </div>
+    
+    <div>
+    <input type="submit" class="btn btn-success" name=".submit" value="Enter new game"/>
+    </div>
 </form>
 
-<TABLE border=1 bordercolor=#000000 cellpadding=1 cellspacing=0 bgcolor=#000000 align=center>
-<TR>
-<TD width=30 align=center><font color=#FFFFFF><b>RANK</TD>
-<TD width=100 align=center><font color=#FFFFFF><b>NAME</TD>
-<!--TD width=30 align=center><font color=#FFFFFF><b>% WIN</TD>
-<TD width=100 align=center><font color=#FFFFFF><b>LAST WIN</TD>
-<TD width=100 align=center><font color=#FFFFFF><b>LAST LOSS</TD-->
-<TD width=30 align=center><font color=#FFFFFF bgcolor=#FFCCCC><b>STREAK</TD>
-<TD width=50 align=center><font color=#FFFFFF bgcolor=#FFCCCC><b>ELO RATING</TD>
-</TR>
+<table>
+<tr>
+<th><b>RANK</th>
+<th><b>NAME</th>
+<!--TD width=30 align=center><font color=#FFFFFF><b>% WIN</td-->
+<th><b>LAST WIN</th>
+<th><b>LAST LOSS</th>
+<th><b>STREAK</th>
+<th><b>ELO RATING</th>
+</tr>
 {% for player in players %}
-<TR>
-    <TD BGCOLOR=#770088 align=center><font color=white><b>{{forloop.counter}}</b></TD>
-    <TD BGCOLOR=#CCDDEE align=left>{{ player.name }}</TD>
-    <!--TD BGCOLOR=#CCDDEE align=center>60</TD>
-    <TD BGCOLOR=#EEFFEE align=center>Conor K</TD>
-    <TD BGCOLOR=#FFEEEE align=center>Conor K</TD-->
+<tr>
+    <td>{{forloop.counter}}</td>
+    <td>{{ player.name }}</td>
+    <!--TD BGCOLOR=#CCDDEE align=center>60</td-->
+    <td>Conor K</td>
+    <td>Conor K</td>
 
     {% if player.streak < 0 %}
-    <TD align=center BGCOLOR=#FFCCCC>{{ player.streak }}</TD>
+    <td> {{ player.streak }}</td>
     {% else %}
-    <TD BGCOLOR=#AACCAA align=center>{{ player.streak}}</TD>
+    <td>{{ player.streak}}</td>
     {% endif %}
 
-    <TD BGCOLOR=#CCDDEE align=center>{{ player.rating }}</TD>
-</TR>
-{% endfor %}
-<TR rowspan=2>
-    <TD bgcolor=#FFFFFF colspan=8 align=center>Match : <b>{{ last_game.id }}</b> :  <b>{{ last_game.winner.name }}</b> vs {{ last_game.loser.name }} for <b>{{ last_game.points }}</b> points.</td>
+    <td>{{ player.rating }}</td>
 </tr>
-</TABLE>
+{% endfor %}
+<tr rowspan=2>
+    <td colspan=8>Match : <b>{{ last_game.id }}</b> :  <b>{{ last_game.winner.name }}</b> vs {{ last_game.loser.name }} for <b>{{ last_game.points }}</b> points.</td>
+</tr>
+</table>
 
+</div>
 </div>
 {% endblock body %}
