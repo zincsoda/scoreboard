@@ -39,7 +39,7 @@ class Scoring(object):
             winner.streak += 1
 
         if loser.streak > 0:
-            loser.streak = 0
+            loser.streak = -1
         else:
             loser.streak -= 1
         winner.save()
