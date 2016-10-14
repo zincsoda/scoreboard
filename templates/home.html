@@ -3,7 +3,7 @@
 <div id="container">
 
 <div class="box">
-<h1>Ping Pong Scoreboard </h1>
+<h1>Pool Scoreboard </h1>
 
 <form class="winlose" method="post" action="/add_score/" enctype="multipart/form-data"> {% csrf_token %}
     <div class="label_input">
@@ -23,7 +23,7 @@
     {% endfor %}
     </select>
     </div>
-    
+
     <div>
     <input type="submit" class="btn btn-success" name=".submit" value="Enter new game"/>
     </div>
@@ -58,7 +58,7 @@
 </tr>
 {% endfor %}
 <tr rowspan=2>
-    <td colspan=8>Match : <b>{{ last_game.id }}</b> :  <b>{{ last_game.winner.name }}</b> vs {{ last_game.loser.name }} for <b>{{ last_game.points }}</b> points.</td>
+    <td colspan=8>Match : <b>{{ number_of_games }}</b> :  <b>{{ last_game.winner.name }}</b> vs {{ last_game.loser.name }} for <b>{{ last_game.points }}</b> points.</td>
 </tr>
 </table>
 </div>
