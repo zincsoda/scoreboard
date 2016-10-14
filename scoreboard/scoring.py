@@ -22,7 +22,7 @@ class Scoring(object):
     def update_player_ratings(self, winner, loser):
         winner_expected = self.get_expectation(winner.rating, loser.rating)
         print 'winner_expected: ', winner_expected
-        loser_expected = 1 - winner_expected
+        loser_expected = winner_expected
         print 'loser_expected: ',loser_expected
         points = self.get_delta(winner.rating, winner_expected, 1.0)
         print 'points: ', points
