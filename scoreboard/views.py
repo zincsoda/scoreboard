@@ -10,16 +10,16 @@ def home(request):
     last_game = Game.objects.all().last()
     players = Player.objects.order_by('rating').reverse()
     players_last_win_loss = []
-    #for player in players:
+    number_of_games = Game.objects.all().count()
 
-    resp_dict = {"players": players, "last_game":last_game}
+    resp_dict = {"players": players, "last_game":last_game, "number_of_games":number_of_games}
     return render_to_response('home.html', resp_dict, context_instance=RequestContext(request))
 
 
 @csrf_protect
 def add_score(request):
     if request.method =="POST":
-           
+
         winner = Player.objects.get(name=request.POST.get('winner'))
         loser = Player.objects.get(name=request.POST.get('loser'))
         if winner == loser:
